@@ -9,6 +9,7 @@
     "build": "webpack"
   },
   "dependencies": {
+    "eslint": "^5.16.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
@@ -16,8 +17,12 @@
   "devDependencies": {
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^4.3.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-react": "^7.20.0",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^0.11.2",
     "postcss-loader": "^4.0.2",

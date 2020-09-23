@@ -1,5 +1,5 @@
-import React from 'react';
+import React from "react";
 
-import './app.scss';
+import "./app.scss";
 
 export const App = () => <div>Initial setup</div>;
