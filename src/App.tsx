@@ -2,7 +2,7 @@ import React from "react";
 
 import Header from './components/Header';
 
-import "./app.scss";
+import "./styles/app.scss";
 
 const App = () => <main>
   <Header />

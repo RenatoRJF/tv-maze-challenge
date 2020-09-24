@@ -10,8 +10,16 @@
 .header__dark-section {
   height: 100%;
   background-color: $color-midnight;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 32px;
+  box-sizing: border-box;
 
   @media screen and (min-width: $portrait-tablet){
     width: 225px;
+    justify-content: center;
+    padding-left: 0;
   }
+
 }
