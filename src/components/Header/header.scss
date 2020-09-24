@@ -6,6 +6,11 @@
   border-top: 3px solid $color-primary;
   background-color: $color-gainsboro;
   box-sizing: border-box;
+
+  @media screen and (min-width: $landscape-tablet) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .header__dark-section {
