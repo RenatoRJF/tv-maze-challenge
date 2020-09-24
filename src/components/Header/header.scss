@@ -5,6 +5,7 @@
   height: 72px;
   border-top: 3px solid $color-primary;
   background-color: $color-gainsboro;
+  box-sizing: border-box;
 }
 
 .header__dark-section {
@@ -15,11 +16,9 @@
   justify-content: space-between;
   padding-left: 32px;
   box-sizing: border-box;
+  min-width: 225px;
 
-  @media screen and (min-width: $portrait-tablet){
+  @media screen and (min-width: $portrait-tablet) {
     width: 225px;
-    justify-content: center;
-    padding-left: 0;
   }
-
 }

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Logo from '../Logo';
+import Search from '../Search';
 
 import './header.scss';
 
@@ -8,6 +9,8 @@ const Header: FC = () => (
     <div className="header__dark-section">
       <Logo />
     </div>
+
+    <Search />
   </header>
 );
 

@@ -1,11 +1,11 @@
 /* Colors */
 $color-base: #292929;
-$color-primary: #E3CE57;
-$color-secondary: #FFFFFF;
+$color-primary: #e3ce57;
+$color-secondary: #ffffff;
 $color-gainsboro: #454545;
-$color-lightgray: #DBDBD8;
+$color-lightgray: #dbdbd8;
 $color-silver: #777777;
-$color-midnight: #211F1F;
+$color-midnight: #211f1f;
 
 /* Screen resolutions */
 $small-phone: 320px;
@@ -14,3 +14,6 @@ $portrait-tablet: 768px;
 $landscape-tablet: 920px;
 $small-desktop: 1440px;
 $large-desktop: 320px;
+
+/* transition duration */
+$transition-fast: 0.3s;
