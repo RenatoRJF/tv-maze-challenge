@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.header {
+  width: 100%;
+  height: 72px;
+  border-top: 3px solid $color-primary;
+  background-color: $color-gainsboro;
+}
+
+.header__dark-section {
+  height: 100%;
+  background-color: $color-midnight;
+
+  @media screen and (min-width: $portrait-tablet){
+    width: 225px;
+  }
+}
