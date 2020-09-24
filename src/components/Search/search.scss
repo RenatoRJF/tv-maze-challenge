@@ -12,6 +12,7 @@
   padding: 0 24px;
   box-sizing: border-box;
   transition: left $transition-fast;
+  z-index: 2;
 
   ::-webkit-input-placeholder {
     color: $color-lightgray;
@@ -19,6 +20,7 @@
 
   img:first-child {
     margin-right: 10px;
+    cursor: pointer;
   }
 
   input {
@@ -33,6 +35,7 @@
 
   img:last-child {
     margin-left: 10px;
+    cursor: pointer;
   }
 
   &.active {
