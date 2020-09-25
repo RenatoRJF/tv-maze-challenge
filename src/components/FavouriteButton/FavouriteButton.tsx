@@ -13,11 +13,15 @@ interface FavouriteButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isFavourited: boolean;
 }
 
-const FavouriteButton: FC<FavouriteButtonProps> = ({ isFavourited, onClick, text }) => (
-  <button onClick={onClick}>
+const FavouriteButton: FC<FavouriteButtonProps> = ({
+  isFavourited,
+  onClick,
+  text,
+}) => (
+  <button className="favourite-button" onClick={onClick}>
     <img src={isFavourited ? HeartShape : Heart} alt="heart" />
     <span>{text}</span>
   </button>
-)
+);
 
 export default FavouriteButton;

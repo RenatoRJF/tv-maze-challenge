@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.favourite-button {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  outline: none;
+  background-color: $color-steel;
+  color: $color-primary;
+  border: 0;
+  border-radius: 100px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: $color-gainsboro;
+  }
+
+  img {
+    margin-right: 16px;
+  }
+}
