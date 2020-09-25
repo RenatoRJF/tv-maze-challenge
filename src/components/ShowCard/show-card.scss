@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.show-card {
+  margin-top: 100px;
+
+  display: block;
+  min-width: 280px;
+  max-width: 280px;
+
+  > img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.show-card__rating {
+  padding: 10px 16px 0;
+}

@@ -6,7 +6,7 @@ import './rating.scss';
 interface RatingProps {
   /* specify the rating average */
   average: number;
-  /* specify the of votes */
+  /* specify the amount of votes */
   amount?: number;
 }
 
