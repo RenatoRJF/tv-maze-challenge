@@ -1,0 +1,39 @@
+@import "../../styles/variables.scss";
+
+.modal {
+  position: fixed;
+  z-index: 5;
+  background-color: rgba($color-gainsboro, 0.7);
+  height: 100%;
+  width: 100%;
+  top: 122px;
+
+  @media screen and (min-width: $landscape-tablet) {
+    top: 70px;
+  }
+}
+
+.modal__content {
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 32px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 {
+    color: $color-secondary;
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  img {
+    width: 20px;
+  }
+}
