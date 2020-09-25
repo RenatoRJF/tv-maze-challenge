@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FavouriteButton from './components/FavouriteButton';
 
 import Header from './components/Header';
 import Modal from './components/Modal';
@@ -13,7 +14,7 @@ const App = () => {
     <main>
       <Header />
 
-      <Rating average={5} amount={10} />
+      <FavouriteButton text="Add to favourites" isFavourited />
 
       <Modal
         open={isModalOpen}
