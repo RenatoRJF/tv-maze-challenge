@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import FavouriteButton from './components/FavouriteButton';
 import Header from './components/Header';
 import Modal from './components/Modal';
+import Rating from './components/Rating';
 
 import './styles/app.scss';
 
@@ -12,6 +12,8 @@ const App = () => {
   return (
     <main>
       <Header />
+
+      <Rating average={5} amount={10} />
 
       <Modal
         open={isModalOpen}

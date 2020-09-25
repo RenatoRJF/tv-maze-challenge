@@ -18,7 +18,11 @@ const FavouriteButton: FC<FavouriteButtonProps> = ({
   onClick,
   text,
 }) => (
-  <button className="favourite-button" onClick={onClick}>
+  <button
+    className="favourite-button"
+    data-testid="favourite-button"
+    onClick={onClick}
+  >
     <img src={isFavourited ? HeartShape : Heart} alt="heart" />
     <span>{text}</span>
   </button>
