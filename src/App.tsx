@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
+import FavouriteButton from './components/FavouriteButton';
 import Header from './components/Header';
 import Modal from "./components/Modal";
 
@@ -11,6 +12,8 @@ const App = () => {
   return (
     <main>
       <Header />
+
+      <FavouriteButton onClick={() => { console.log('test') }} text="Add to Favourites" isFavourited={false} />
 
       <Modal open={isModalOpen} title="Action" onClose={() => setIsModalOpen(false)}>
         Modal content
