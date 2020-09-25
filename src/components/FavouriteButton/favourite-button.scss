@@ -1,15 +1,17 @@
 @import '../../styles/variables.scss';
 
 .favourite-button {
+  margin-top: 200px;
+
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  justify-content: center;
   outline: none;
   background-color: $color-steel;
-  color: $color-primary;
   border: 0;
-  border-radius: 100px;
-  font-size: 16px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
   cursor: pointer;
   transition: background-color $transition-fast;
 
@@ -17,7 +19,25 @@
     background-color: $color-gainsboro;
   }
 
-  img {
-    margin-right: 16px;
+  span {
+    display: none;
+  }
+
+  @media screen and (min-width: $landscape-tablet) {
+    height: initial;
+    width: initial;
+    justify-content: flex-end;
+    border-radius: 100px;
+    font-size: 16px;
+    color: $color-primary;
+    padding: 12px 16px;
+
+    img {
+      margin-right: 16px;
+    }
+
+    span {
+      display: block;
+    }
   }
 }
