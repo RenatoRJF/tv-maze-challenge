@@ -7,6 +7,7 @@
   position: relative;
   height: 50px;
   background-color: $color-steel;
+  z-index: 1;
 
   @media screen and (min-width: $landscape-tablet) {
     flex: 1;
