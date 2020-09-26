@@ -8,6 +8,7 @@
     max-width: 100%;
     overflow: scroll;
     padding-left: 10px;
+    box-sizing: border-box;
 
     &::-webkit-scrollbar {
       display: none;
@@ -24,6 +25,7 @@
   display: block;
   margin: 0 0 16px 30px;
   font-size: 18px;
+  margin-top: 40px;
 }
 
 .card-list__arrow {

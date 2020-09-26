@@ -6,6 +6,9 @@
   border-top: 3px solid $color-primary;
   background-color: $color-gainsboro;
   box-sizing: border-box;
+  position: fixed;
+  z-index: 5;
+  top: 0;
 
   @media screen and (min-width: $landscape-tablet) {
     display: flex;

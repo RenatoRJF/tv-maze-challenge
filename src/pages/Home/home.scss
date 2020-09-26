@@ -1,0 +1,9 @@
+@import '../../styles/variables.scss';
+
+.home {
+  margin-top: 160px;
+
+  @media screen and (min-width: $landscape-tablet) {
+    margin-top: 120px;
+  }
+}
