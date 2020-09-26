@@ -3,6 +3,7 @@ import CardList from './components/CardList';
 
 import Header from './components/Header';
 import Modal from './components/Modal';
+import Routes from './routes';
 
 import './styles/app.scss';
 
@@ -30,11 +31,13 @@ const App = () => {
     <main>
       <Header />
 
-      <CardList title="Most popular" items={shows} />
+      {/* <CardList title="Most popular" items={shows} />
 
       <CardList title="Recent" items={shows} />
 
-      <CardList title="Recent" items={shows} />
+      <CardList title="Recent" items={shows} /> */}
+
+      <Routes />
 
       <Modal
         open={isModalOpen}
