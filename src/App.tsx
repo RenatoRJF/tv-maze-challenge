@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import CardList from './components/CardList';
 import Header from './components/Header';
 import Modal from './components/Modal';
-import Routes from './routes';
 
 import { useAppState } from './components/AppProvider';
 import LoadShowsService from './services/LoadShowsService';
@@ -14,6 +14,7 @@ import { Show } from './types/shows';
 import './styles/app.scss';
 
 const App = () => {
+  const history = useHistory();
   const [{ shows: showsState }, dispatch] = useAppState();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(
     Boolean(showsState?.selectedGenre),
@@ -66,18 +67,37 @@ const App = () => {
     }
   }, [showsState.selectedGenre]);
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+
+    dispatch({
+      type: SHOWS_TYPES.SET_GENRE,
+      payload: '',
+    });
+  };
+
   return (
-    <Routes>
+    <>
       <Header />
 
       <Modal
         open={isModalOpen}
         title={showsState.selectedGenre}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleCloseModal}
       >
-        <CardList items={showsState?.showsByGenre || []} />
+        <CardList
+          items={showsState?.showsByGenre || []}
+          onCardClicked={id => {
+            history.push(`/shows/${id}`);
+
+            dispatch({
+              type: SHOWS_TYPES.SET_GENRE,
+              payload: '',
+            });
+          }}
+        />
       </Modal>
-    </Routes>
+    </>
   );
 };
 

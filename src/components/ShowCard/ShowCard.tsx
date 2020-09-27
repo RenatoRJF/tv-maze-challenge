@@ -1,27 +1,27 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Rating from '../Rating';
 
 import './show-card.scss';
 
 interface ShowCardProps {
-  /* specifies the id of the show */
-  id?: number;
   /* specifies the image of the show */
   image: string;
   /* specify the rating average */
   average?: number;
+  /* Function fired when card is clicked */
+  onClick?: () => void;
 }
 
-const ShowCard: FC<ShowCardProps> = ({ image, average, id }) => (
-  <Link className="show-card" data-testid="show-card" to={`/shows/${id}`}>
+const ShowCard: FC<ShowCardProps> = ({ image, average, onClick }) => (
+  <div className="show-card" data-testid="show-card" onClick={onClick}>
     <img src={image} alt="show" />
 
     <div className="show-card__rating">
       <Rating average={average || 0} />
     </div>
-  </Link>
+  </div>
 );
 
 export default ShowCard;

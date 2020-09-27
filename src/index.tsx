@@ -4,10 +4,13 @@ import store from './store';
 
 import AppProvider from './components/AppProvider';
 import App from './App';
+import Routes from './routes';
 
 ReactDOM.render(
   <AppProvider store={store}>
-    <App />
+    <Routes>
+      <App />
+    </Routes>
   </AppProvider>,
   document.getElementById('root'),
 );

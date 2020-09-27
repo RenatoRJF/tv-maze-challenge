@@ -50,6 +50,7 @@
     img {
       min-height: initial;
       max-height: initial;
+      cursor: default;
     }
 
     @media screen and (min-width: $regular-phone) {

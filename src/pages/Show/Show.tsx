@@ -50,7 +50,7 @@ const Show = () => {
         setShow(formatShowData(data));
       });
     }
-  }, []);
+  }, [params]);
 
   return (
     <div className="show">

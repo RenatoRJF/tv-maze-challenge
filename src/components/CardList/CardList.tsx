@@ -4,7 +4,7 @@ import ShowCard from '../ShowCard';
 
 import './card-list.scss';
 
-interface Show {
+interface ShowCard {
   id: number;
   image: string;
   rating: {
@@ -15,16 +15,26 @@ interface Show {
 
 interface CardListProps {
   title?: string;
-  items: Show[];
+  items: ShowCard[];
+  onCardClicked?: (id: number) => void;
 }
 
-const CardList: FC<CardListProps> = ({ title, items }) => (
+const CardList: FC<CardListProps> = ({ title, items, onCardClicked }) => (
   <div className="card-list" data-testid="card-list">
     <span className="card-list__title">{title}</span>
 
     <ul>
       {items.map(({ id, image, rating }) => (
-        <ShowCard key={id} image={image} average={rating.average} id={id} />
+        <ShowCard
+          key={id}
+          image={image}
+          average={rating.average}
+          onClick={() => {
+            if (onCardClicked) {
+              onCardClicked(id);
+            }
+          }}
+        />
       ))}
     </ul>
   </div>
