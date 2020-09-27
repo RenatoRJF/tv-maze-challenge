@@ -1,9 +1,9 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .modal {
   position: fixed;
   z-index: 5;
-  background-color: rgba($color-gainsboro, 0.7);
+  background-color: rgba($color-darkest, 0.5);
   height: 100%;
   width: 100%;
   top: 122px;
@@ -13,24 +13,47 @@
   }
 }
 
-.modal__content {
-  max-width: 1000px;
+.modal__container {
+  max-width: 1230px;
   height: 100%;
   margin: 0 auto;
-  padding: 32px;
+  padding: 32px 0;
   box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba($color-darkest, 0.8);
+}
+
+.modal__content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  @media screen and (min-width: $portrait-tablet) {
+    padding: 0 16px;
+  }
 }
 
 .modal__header {
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (min-width: $portrait-tablet) {
+    padding: 0 40px;
+  }
 
   h3 {
     color: $color-secondary;
     font-weight: 400;
     font-size: 24px;
+
+    @media screen and (min-width: $landscape-tablet) {
+      font-size: 32px;
+    }
   }
 
   img {

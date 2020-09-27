@@ -9,7 +9,21 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: $color-base;
   font-size: 16px;
+}
+
+.modal .card-list {
+  top: -70px;
+
+  .show-card {
+    max-width: 240px;
+    min-width: 240px;
+
+    @media screen and (min-width: $landscape-tablet) {
+      max-width: 300px;
+      min-width: 300px;
+    }
+  }
 }

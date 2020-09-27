@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CardList from './components/CardList';
 
 import Header from './components/Header';
 import Modal from './components/Modal';
@@ -7,7 +8,7 @@ import Routes from './routes';
 import './styles/app.scss';
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 
   return (
     <main>
@@ -20,7 +21,7 @@ const App = () => {
         title="Action"
         onClose={() => setIsModalOpen(false)}
       >
-        Modal content
+        <CardList items={[]} />
       </Modal>
     </main>
   );

@@ -13,19 +13,18 @@ interface ModalProps {
   title: string;
 }
 
-const Modal: FC<ModalProps> = ({ title, children, open = false, onClose }) => (
+const Modal: FC<ModalProps> = ({ title, children, open = false, onClose }) =>
   open ? (
     <div className="modal" data-testid="modal">
-      <div className="modal__content">
+      <div className="modal__container">
         <header className="modal__header">
           <h3>{title}</h3>
           <img src={closeIcon} alt="close" onClick={onClose} />
         </header>
 
-        {children}
+        <div className="modal__content">{children}</div>
       </div>
     </div>
-  ): null
-)
+  ) : null;
 
 export default Modal;
