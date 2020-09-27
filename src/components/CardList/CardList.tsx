@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import ShowCard from '../ShowCard';
 
@@ -22,6 +22,8 @@ interface CardListProps {
   onCardClicked?: (id: number) => void;
   /* Specifies orientation of the list */
   orientation?: 'horizontal' | 'vertical';
+  /* Finction fired when scroll ends */
+  onScrollEnd?: () => void;
 }
 
 const CardList: FC<CardListProps> = ({
@@ -29,25 +31,48 @@ const CardList: FC<CardListProps> = ({
   items,
   onCardClicked,
   orientation = 'horizontal',
-}) => (
-  <div className="card-list" data-testid="card-list">
-    <span className="card-list__title">{title}</span>
+  onScrollEnd,
+}) => {
+  const listRef = useRef<any>();
 
-    <ul data-orientation={orientation}>
-      {items.map(({ id, image, rating }) => (
-        <ShowCard
-          key={id}
-          image={image}
-          average={rating.average}
-          onClick={() => {
-            if (onCardClicked) {
-              onCardClicked(id);
-            }
-          }}
-        />
-      ))}
-    </ul>
-  </div>
-);
+  useEffect(() => {
+    const elem = listRef.current;
+
+    const onScroll = function () {
+      if (elem.offsetWidth + elem.scrollLeft >= elem.scrollWidth) {
+        if (onScrollEnd) {
+          onScrollEnd();
+        }
+      }
+    };
+
+    elem.addEventListener('scroll', onScroll);
+
+    return () => {
+      elem.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
+  return (
+    <div className="card-list" data-testid="card-list">
+      <span className="card-list__title">{title}</span>
+
+      <ul data-orientation={orientation} ref={listRef}>
+        {items.map(({ id, image, rating }) => (
+          <ShowCard
+            key={id}
+            image={image}
+            average={rating.average}
+            onClick={() => {
+              if (onCardClicked) {
+                onCardClicked(id);
+              }
+            }}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default CardList;
