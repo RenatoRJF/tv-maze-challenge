@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.info {
+  color: $color-secondary;
+  opacity: 0.7;
+  font-size: 16px;
+  display: block;
+  margin: 10px 0;
+
+  span {
+    font-weight: 300;
+  }
+}
