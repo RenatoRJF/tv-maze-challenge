@@ -59,6 +59,7 @@
       line-height: 20px;
       transition: color $transition-fast, background-color $transition-fast;
       cursor: pointer;
+      white-space: nowrap;
 
       &.genre-active,
       &:hover {
