@@ -3,10 +3,10 @@ import { ShowsState } from './shows.state';
 
 const tasksReducer = (state: ShowsState, action: TasksActionTypes) => {
   switch (action.type) {
-    case SHOWS_TYPES.LOAD_POPULAR:
+    case SHOWS_TYPES.LOAD_MOST_RATED:
       return {
         ...state,
-        popular: [...state.popular, ...action.payload],
+        mostRated: [...state.mostRated, ...action.payload],
       };
 
     case SHOWS_TYPES.LOAD_RECENT:

@@ -1,7 +1,7 @@
 import { Show } from '../../types/shows';
 
 export enum SHOWS_TYPES {
-  LOAD_POPULAR = 'LOAD_POPULAR',
+  LOAD_MOST_RATED = 'LOAD_MOST_RATED',
   LOAD_RECENT = 'LOAD_RECENT',
   LOAD_FAVOURITES = 'LOAD_FAVOURITES',
   LOAD_BY_GENRE = 'LOAD_BY_GENRE',
@@ -11,8 +11,8 @@ export enum SHOWS_TYPES {
   SET_LOADER = 'SET_LOADER',
 }
 
-interface loadPopularShows {
-  type: typeof SHOWS_TYPES.LOAD_POPULAR;
+interface loadMostRatedShows {
+  type: typeof SHOWS_TYPES.LOAD_MOST_RATED;
   payload: Show[];
 }
 
@@ -55,7 +55,7 @@ interface setLoader {
 }
 
 export type TasksActionTypes =
-  | loadPopularShows
+  | loadMostRatedShows
   | loadRecentShows
   | loadFavouriteShows
   | loadShowsByGenre

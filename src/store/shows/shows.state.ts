@@ -1,7 +1,7 @@
 import { Show } from '../../types/shows';
 
 export interface ShowsState {
-  popular: Show[];
+  mostRated: Show[];
   recent: Show[];
   favourites: Show[];
   showsByGenre: Show[];
@@ -18,7 +18,7 @@ export interface ShowsState {
 }
 
 const state: ShowsState = {
-  popular: [],
+  mostRated: [],
   recent: [],
   favourites: [],
   showsByGenre: [],
