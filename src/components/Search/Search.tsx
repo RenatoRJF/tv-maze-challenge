@@ -11,11 +11,14 @@ interface SearchProps {
   className?: string;
   /* Function fired when inputs value change */
   onSearch?: (value: string) => void;
+  /* Function fired when search is closed */
+  onClose?: () => void;
 }
 
-const Search: FC<SearchProps> = ({ className, onSearch }) => {
+const Search: FC<SearchProps> = ({ className, onSearch, onClose }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [value, setValue] = useState<string>('');
   const classes = cn('search', className, {
     active: isActive,
   });
@@ -29,8 +32,12 @@ const Search: FC<SearchProps> = ({ className, onSearch }) => {
   };
 
   const handleSearch = (e: FormEvent<HTMLInputElement>): void => {
+    const value = e.currentTarget.value;
+
+    setValue(value);
+
     if (onSearch) {
-      onSearch(e.currentTarget.value);
+      onSearch(value);
     }
   };
 
@@ -38,9 +45,26 @@ const Search: FC<SearchProps> = ({ className, onSearch }) => {
     <div className={classes} data-testid="search">
       <img src={searchIcon} alt="search" onClick={handleActivateSearch} />
 
-      <input ref={inputRef} placeholder="Search here" onChange={handleSearch} />
+      <input
+        ref={inputRef}
+        placeholder="Search here"
+        value={value}
+        onChange={handleSearch}
+      />
 
-      <img src={closeIcon} alt="close" onClick={() => setIsActive(false)} />
+      <img
+        src={closeIcon}
+        alt="close"
+        onClick={() => {
+          if (onClose) {
+            onClose();
+          }
+
+          setValue('');
+
+          setIsActive(false);
+        }}
+      />
     </div>
   );
 };

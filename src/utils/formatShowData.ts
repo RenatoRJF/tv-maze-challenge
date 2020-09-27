@@ -5,7 +5,7 @@ const formatShowData = (show: any): Show => ({
   name: show.name,
   year: show.premiered,
   summary: show.summary,
-  image: show?.image.original || show?.image.medium,
+  image: show?.image?.original || show?.image?.medium,
   type: show.type,
   genres: show.genres,
   language: show.language,

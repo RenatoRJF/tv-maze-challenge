@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
+import SearchShowsService from '../../services/SearchShowsService';
 import { SHOWS_TYPES } from '../../store/shows/shows.actions';
+import formatShowData from '../../utils/formatShowData';
 import { useAppState } from '../AppProvider';
 import GenresList from '../GenresList';
 import Logo from '../Logo';
 import Search from '../Search';
 
+import DefaultImage from '../../assets/default.svg';
 import './header.scss';
 
 const genres = [
@@ -40,6 +44,8 @@ const genres = [
 
 const Header: FC = () => {
   const [{ shows: showsState }, dispatch] = useAppState();
+  const searchShowsService = new SearchShowsService();
+  let inverval: NodeJS.Timeout;
 
   const handleSelectGenre = (genre: string): void => {
     dispatch({
@@ -48,10 +54,42 @@ const Header: FC = () => {
     });
   };
 
+  const handleSearch = (value: string) => {
+    if (value) {
+      debounceSearch(searchShowsService, value, 1000);
+    }
+  };
+
+  const debounceSearch = (func: any, value: string, delay: number) => {
+    // Cancels the setTimeout method execution
+    clearTimeout(inverval);
+
+    // Executes the func after delay time.
+    inverval = setTimeout(() => {
+      func.execute(value).then(({ data }: any) => {
+        const searchResult = data.map((item: any) =>
+          formatShowData({
+            ...item.show,
+            image: item.show.image || { original: DefaultImage },
+          }),
+        );
+
+        if (searchResult.length) {
+          dispatch({
+            type: SHOWS_TYPES.LOAD_SEARCHED,
+            payload: searchResult,
+          });
+        }
+      });
+    }, delay);
+  };
+
   return (
     <header className="header" data-testid="header">
       <div className="header__dark-section">
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
       </div>
 
       <GenresList
@@ -60,7 +98,15 @@ const Header: FC = () => {
         onSelect={handleSelectGenre}
       />
 
-      <Search />
+      <Search
+        onSearch={handleSearch}
+        onClose={() => {
+          dispatch({
+            type: SHOWS_TYPES.LOAD_SEARCHED,
+            payload: [],
+          });
+        }}
+      />
     </header>
   );
 };

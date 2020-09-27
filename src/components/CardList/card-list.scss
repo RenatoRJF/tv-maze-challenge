@@ -17,6 +17,11 @@
     .show-card {
       margin: 0 10px;
     }
+
+    &[data-orientation='vertical'] {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 }
 

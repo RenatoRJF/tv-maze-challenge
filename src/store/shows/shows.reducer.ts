@@ -45,10 +45,10 @@ const tasksReducer = (state: ShowsState, action: TasksActionTypes) => {
         selectedGenre: action.payload,
       };
 
-    case SHOWS_TYPES.SET_IS_SEACHING:
+    case SHOWS_TYPES.SET_SEARCH_VALUE:
       return {
         ...state,
-        isSearching: action.payload,
+        searchValue: action.payload,
       };
 
     case SHOWS_TYPES.SET_LOADER:

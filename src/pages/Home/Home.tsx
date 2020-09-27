@@ -16,23 +16,33 @@ const Home = () => {
 
   return (
     <div className="home">
-      <CardList
-        title="Most popular"
-        items={showsState?.mostRated}
-        onCardClicked={handleCardClick}
-      />
+      {showsState.searched.length === 0 ? (
+        <>
+          <CardList
+            title="Most rated"
+            items={showsState?.mostRated}
+            onCardClicked={handleCardClick}
+          />
 
-      <CardList
-        title="Most recent"
-        items={showsState?.recent}
-        onCardClicked={handleCardClick}
-      />
+          <CardList
+            title="Most recent"
+            items={showsState?.recent}
+            onCardClicked={handleCardClick}
+          />
 
-      <CardList
-        title="Favourites"
-        items={showsState?.favourites}
-        onCardClicked={handleCardClick}
-      />
+          <CardList
+            title="Favourites"
+            items={showsState?.favourites}
+            onCardClicked={handleCardClick}
+          />
+        </>
+      ) : (
+        <CardList
+          orientation="vertical"
+          items={showsState?.searched}
+          onCardClicked={handleCardClick}
+        />
+      )}
     </div>
   );
 };

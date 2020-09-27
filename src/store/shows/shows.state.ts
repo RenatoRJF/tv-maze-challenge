@@ -8,7 +8,7 @@ export interface ShowsState {
   showsByGenre: Show[];
   searched: Show[];
   selectedGenre: string;
-  isSearching: boolean;
+  searchValue: string;
   currentPage: number;
   loading: {
     popular: boolean;
@@ -27,7 +27,7 @@ const state: ShowsState = {
   showsByGenre: [],
   searched: [],
   selectedGenre: '',
-  isSearching: false,
+  searchValue: '',
   currentPage: 1,
   loading: {
     popular: false,

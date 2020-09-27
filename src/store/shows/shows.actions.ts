@@ -7,7 +7,7 @@ export enum SHOWS_TYPES {
   LOAD_FAVOURITES = 'LOAD_FAVOURITES',
   LOAD_BY_GENRE = 'LOAD_BY_GENRE',
   LOAD_SEARCHED = 'LOAD_SEARCHED',
-  SET_IS_SEACHING = 'SET_IS_SEACHING',
+  SET_SEARCH_VALUE = 'SET_SEARCH_VALUE',
   SET_GENRE = 'SET_GENRE',
   SET_LOADER = 'SET_LOADER',
 }
@@ -42,8 +42,8 @@ interface loadSearchedShows {
   payload: Show[];
 }
 
-interface setIsSearching {
-  type: typeof SHOWS_TYPES.SET_IS_SEACHING;
+interface setSearchValue {
+  type: typeof SHOWS_TYPES.SET_SEARCH_VALUE;
   payload: boolean;
 }
 
@@ -67,6 +67,6 @@ export type TasksActionTypes =
   | loadFavouriteShows
   | loadShowsByGenre
   | loadSearchedShows
-  | setIsSearching
+  | setSearchValue
   | setGenre
   | setLoader;
