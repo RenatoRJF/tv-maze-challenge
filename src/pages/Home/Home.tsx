@@ -15,24 +15,26 @@ const Home = () => {
   const loadShowsService = new LoadShowsService();
 
   useEffect(() => {
-    loadShowsService.execute(1).then(({ data }) => {
-      const shows = formatShowData(data);
+    if (showsState?.mostRated && showsState?.mostRated.length === 0) {
+      loadShowsService.execute(1).then(({ data }) => {
+        const shows = data.map((show: any) => formatShowData(show));
 
-      dispatch({
-        type: SHOWS_TYPES.LOAD_MOST_RATED,
-        payload: shows.sort(
-          (a: Show, b: Show) => b?.rating.avarage - a?.rating.avarage,
-        ),
-      });
+        dispatch({
+          type: SHOWS_TYPES.LOAD_MOST_RATED,
+          payload: shows.sort(
+            (a: Show, b: Show) => b?.rating.average - a?.rating.average,
+          ),
+        });
 
-      dispatch({
-        type: SHOWS_TYPES.LOAD_RECENT,
-        payload: shows.sort(
-          (a: Show, b: Show) =>
-            new Date(b.year).getTime() - new Date(a.year).getTime(),
-        ),
+        dispatch({
+          type: SHOWS_TYPES.LOAD_RECENT,
+          payload: shows.sort(
+            (a: Show, b: Show) =>
+              new Date(b.year).getTime() - new Date(a.year).getTime(),
+          ),
+        });
       });
-    });
+    }
   }, []);
 
   return (

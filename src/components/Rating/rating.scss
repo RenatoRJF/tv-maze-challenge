@@ -3,7 +3,6 @@
 .rating {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: 40px;
   max-width: 400px;
 }
@@ -31,4 +30,8 @@
 
 .rating__info {
   color: $color-secondary;
+  margin-left: 16px;
+  display: block;
+  height: 20px;
+  padding-top: 2px;
 }

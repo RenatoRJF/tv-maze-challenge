@@ -6,7 +6,7 @@ import ShowCard from '../ShowCard';
 import './card-list.scss';
 
 interface Show {
-  id: string;
+  id: number;
   image: string;
   average: number;
   amount: number;
@@ -22,8 +22,8 @@ const CardList: FC<CardListProps> = ({ title, items }) => (
     <span className="card-list__title">{title}</span>
 
     <ul>
-      {items.map(({ id, image, average, amount }) => (
-        <ShowCard key={id} image={image} average={average} amount={amount} />
+      {items.map(({ id, image, average }) => (
+        <ShowCard key={id} image={image} average={average} id={id} />
       ))}
     </ul>
   </div>

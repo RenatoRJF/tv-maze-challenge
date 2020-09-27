@@ -5,7 +5,7 @@
   flex-direction: column;
   padding: 0 24px;
   box-sizing: border-box;
-  max-width: 1000px;
+  max-width: 1230px;
   margin: 150px auto 0;
 
   @media screen and (min-width: $regular-phone) {
@@ -47,13 +47,18 @@
     max-width: 100%;
     margin: 0 auto;
 
+    img {
+      min-height: initial;
+      max-height: initial;
+    }
+
     @media screen and (min-width: $regular-phone) {
       min-width: 333px;
       max-width: 333px;
     }
 
     @media screen and (min-width: $landscape-tablet) {
-      margin-right: 56px;
+      margin: 0 56px 0 0;
     }
   }
 
@@ -65,6 +70,7 @@
 
     @media screen and (min-width: $regular-phone) {
       font-size: 36px;
+      margin-top: 32px;
     }
 
     @media screen and (min-width: $landscape-tablet) {
@@ -77,10 +83,10 @@
     font-weight: 300;
     margin-top: 24px;
     margin-bottom: 24px;
-    font-size: 18px;
+    font-size: 16px;
 
     @media screen and (min-width: $landscape-tablet) {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 }

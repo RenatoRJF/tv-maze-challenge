@@ -4,13 +4,14 @@ export interface Show {
   summary: string;
   image: string;
   type: string;
-  genres: string;
+  genres: string[];
   language: string;
-  runtime: string;
+  runtime: number;
   officialSite: string;
   year: string;
+  status: string;
   rating: {
-    avarage: number;
+    average: number;
   };
   network: {
     name: string;

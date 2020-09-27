@@ -1,64 +1,97 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
+
 import FavouriteButton from '../../components/FavouriteButton';
 import ShowCard from '../../components/ShowCard';
 import Info from '../../components/Info';
+import { useAppState } from '../../components/AppProvider';
+import LoadShowByIdService from '../../services/LoadShowByIdService';
+
 import ArrowLeft from '../../assets/arrow-left.svg';
 
 import './show.scss';
+import { Show } from '../../types/shows';
+import formatShowData from '../../utils/formatShowData';
 
-const Show = () => (
-  <div className="show">
-    <div className="show__top-section">
-      <a href="#">
-        <img src={ArrowLeft} alt="arrow left" />
-        Home
-      </a>
+const Show = () => {
+  const params = useParams<{ id: string }>();
+  const loadShowByIdService = new LoadShowByIdService();
+  const [show, setShow] = useState<Omit<Show, 'id'>>({
+    name: '',
+    year: '',
+    summary: '',
+    image: '',
+    type: '',
+    genres: [],
+    language: '',
+    runtime: 0,
+    officialSite: '',
+    rating: {
+      average: 0,
+    },
+    network: {
+      name: '',
+      country: {
+        name: '',
+        code: '',
+      },
+    },
+    schedule: {
+      time: '',
+      days: [],
+    },
+    status: '',
+  });
 
-      <FavouriteButton text="Add to favourites" isFavourited={false} />
-    </div>
+  useEffect(() => {
+    if (params?.id) {
+      loadShowByIdService.execute(Number(params.id)).then(({ data }) => {
+        setShow(formatShowData(data));
+      });
+    }
+  }, []);
 
-    <div className="show__details">
-      <ShowCard
-        image="http://static.tvmaze.com/uploads/images/medium_portrait/81/202627.jpg"
-        average={3.5}
-        amount={15}
-      />
+  return (
+    <div className="show">
+      <div className="show__top-section">
+        <Link to="/">
+          <img src={ArrowLeft} alt="arrow left" />
+          Home
+        </Link>
 
-      <div>
-        <h1 className="show__title">Raised by wolves</h1>
+        <FavouriteButton text="Add to favourites" isFavourited={false} />
+      </div>
 
-        <Info label="Genre" value="Action" />
+      <div className="show__details">
+        <ShowCard image={show.image} average={show?.rating.average} />
 
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry’s standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
+        <div>
+          <h1 className="show__title">{show.name}</h1>
+
+          <Info label="Status" value={show.status} />
+
+          {parse(show.summary)}
+        </div>
+      </div>
+
+      <div className="show__info">
+        <div>
+          <Info label="Language" value={show.language} />
+          <Info label="Year" value={show.year} />
+          <Info label="Network" value={show.language} />
+          <Info label="Schedule" value={show.language} />
+        </div>
+
+        <div>
+          <Info label="Genres" value={show.genres.join(', ')} />
+          <Info label="Status" value={show.status} />
+          <Info label="Show type" value={show.type} />
+          <Info label="Official site" value={show.officialSite} />
+        </div>
       </div>
     </div>
-
-    <div className="show__info">
-      <div>
-        <Info label="Genre" value="Action" />
-        <Info label="Genre" value="Action" />
-        <Info label="Genre" value="Action" />
-        <Info label="Genre" value="Action" />
-      </div>
-
-      <div>
-        <Info label="Genre" value="Action" />
-        <Info label="Genre" value="Action" />
-        <Info label="Genre" value="Action" />
-        <Info label="Genre" value="Action" />
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 export default Show;
