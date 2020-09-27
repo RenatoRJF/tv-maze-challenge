@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 
-import ArrowLeft from '../../assets/arrow-left.svg';
 import ShowCard from '../ShowCard';
 
 import './card-list.scss';
@@ -8,7 +7,9 @@ import './card-list.scss';
 interface Show {
   id: number;
   image: string;
-  average: number;
+  rating: {
+    average: number;
+  };
   amount: number;
 }
 
@@ -22,8 +23,8 @@ const CardList: FC<CardListProps> = ({ title, items }) => (
     <span className="card-list__title">{title}</span>
 
     <ul>
-      {items.map(({ id, image, average }) => (
-        <ShowCard key={id} image={image} average={average} id={id} />
+      {items.map(({ id, image, rating }) => (
+        <ShowCard key={id} image={image} average={rating.average} id={id} />
       ))}
     </ul>
   </div>

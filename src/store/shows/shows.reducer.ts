@@ -3,6 +3,12 @@ import { ShowsState } from './shows.state';
 
 const tasksReducer = (state: ShowsState, action: TasksActionTypes) => {
   switch (action.type) {
+    case SHOWS_TYPES.LOAD_SHOWS:
+      return {
+        ...state,
+        allShows: [...state.allShows, ...action.payload],
+      };
+
     case SHOWS_TYPES.LOAD_MOST_RATED:
       return {
         ...state,
@@ -24,7 +30,7 @@ const tasksReducer = (state: ShowsState, action: TasksActionTypes) => {
     case SHOWS_TYPES.LOAD_BY_GENRE:
       return {
         ...state,
-        showsByGenre: [...state.showsByGenre, ...action.payload],
+        showsByGenre: action.payload,
       };
 
     case SHOWS_TYPES.LOAD_SEARCHED:

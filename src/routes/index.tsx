@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Show from '../pages/Show';
 
-const Routes: FC = () => (
+const Routes: FC<{ children: ReactNode }> = ({ children }) => (
   <Router>
     <Switch>
       <Route exact path="/" component={Home} />
@@ -15,6 +15,8 @@ const Routes: FC = () => (
         <p>Not found</p>
       </Route>
     </Switch>
+
+    {children}
   </Router>
 );
 
