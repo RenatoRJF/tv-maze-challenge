@@ -8,7 +8,7 @@ interface InfoProps {
 }
 
 const Info: FC<InfoProps> = ({ label, value }) => (
-  <strong className="info" data-testod="info">
+  <strong className="info" data-testid="info">
     {label}: <span>{value}</span>
   </strong>
 );
