@@ -33,11 +33,14 @@
         "tsx": "never"
       }
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/prop-types": "off",
+    "react/no-unescaped-entities": "off"
   },
   "settings": {
     "import/resolver": {
       "typescript": {}
-    }
+    },
+    "json/ignore-files": ["**/*"]
   }
 }
