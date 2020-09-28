@@ -3,7 +3,7 @@ import { Show } from '../types/shows';
 const formatShowData = (show: any): Show => ({
   id: show.id,
   name: show.name,
-  year: show.premiered,
+  year: show.premiered ? new Date(show.premiered).getFullYear().toString() : '',
   summary: show.summary,
   image: show?.image?.original || show?.image?.medium,
   type: show.type,
