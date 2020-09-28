@@ -67,6 +67,8 @@ const Header: FC = () => {
 
     // Executes the func after delay time.
     inverval = setTimeout(() => {
+      setLoaderState('search', true);
+
       func.execute(value).then(({ data }: any) => {
         const searchResult = data.map((item: any) =>
           formatShowData({
@@ -81,8 +83,17 @@ const Header: FC = () => {
             payload: searchResult,
           });
         }
+
+        setLoaderState('search', false);
       });
     }, delay);
+  };
+
+  const setLoaderState = (name: string, status: boolean) => {
+    dispatch({
+      type: SHOWS_TYPES.SET_LOADER,
+      payload: { name, status },
+    });
   };
 
   return (

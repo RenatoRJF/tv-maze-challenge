@@ -9,6 +9,7 @@ import './home.scss';
 const Home = () => {
   const history = useHistory();
   const [{ shows: showsState }] = useAppState();
+  const { searched, loading } = showsState;
 
   const handleCardClick = (id: number): void => {
     history.push(`/shows/${id}`);
@@ -16,7 +17,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      {showsState.searched.length === 0 ? (
+      {searched.length === 0 && !loading.search ? (
         <>
           <CardList
             title="Most rated"
@@ -38,6 +39,7 @@ const Home = () => {
         </>
       ) : (
         <CardList
+          isLoading={showsState.loading.search}
           orientation="vertical"
           items={showsState?.searched}
           onCardClicked={handleCardClick}

@@ -63,23 +63,23 @@ const CardList: FC<CardListProps> = ({
       <span className="card-list__title">{title}</span>
 
       <ul data-orientation={orientation} ref={listRef}>
-        {items.map(({ id, image, rating }) => (
-          <ShowCard
-            key={id}
-            image={image}
-            average={rating.average}
-            onClick={() => {
-              if (onCardClicked) {
-                onCardClicked(id);
-              }
-            }}
-          />
-        ))}
-
-        {isLoading && (
+        {isLoading ? (
           <div className="loader-wrapper">
             <Loader />
           </div>
+        ) : (
+          items.map(({ id, image, rating }) => (
+            <ShowCard
+              key={id}
+              image={image}
+              average={rating.average}
+              onClick={() => {
+                if (onCardClicked) {
+                  onCardClicked(id);
+                }
+              }}
+            />
+          ))
         )}
       </ul>
     </div>
