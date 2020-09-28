@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest -c jest.config.js --watchAll",
     "start": "webpack-dev-server --open",
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.1.5",

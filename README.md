@@ -2,8 +2,6 @@
 
 This challenge consists of an application that consume the public `tvmaze API` and display tv shows by its genres and ratings and also make the user able to search for an specific show. The app was implemented to be mobile friendly and has just two routes: `Home` and `Show`.
 
-##### [DEMO]()
-
 #
 
 ### Runing the project locally

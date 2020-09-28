@@ -5,6 +5,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
 module.exports = {
+  stats: {
+    entrypoints: false,
+    children: false,
+  },
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   target: 'web',
   mode: 'development',
@@ -22,11 +26,11 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: 'awesome-typescript-loader',
       },
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader',
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.js$/,
+      //   loader: 'source-map-loader',
+      // },
       {
         test: /\.(css|sass|scss)$/,
         use: [
@@ -38,19 +42,12 @@ module.exports = {
           },
           {
             loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              sourceMap: true,
-            },
           },
-          {
-            loader: 'postcss-loader',
-          },
+          // {
+          //   loader: 'postcss-loader',
+          // },
           {
             loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
           },
         ],
       },
