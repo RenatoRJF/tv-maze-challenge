@@ -9,6 +9,8 @@
     overflow: scroll;
     padding-left: 10px;
     box-sizing: border-box;
+    align-items: center;
+    scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
       display: none;
@@ -31,4 +33,10 @@
   margin: 0 0 16px 30px;
   font-size: 18px;
   margin-top: 40px;
+}
+
+.loader-wrapper {
+  padding: 0 100px;
+  display: flex;
+  justify-content: center;
 }

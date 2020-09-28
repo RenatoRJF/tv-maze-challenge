@@ -4,33 +4,25 @@ import { ShowsState } from './shows.state';
 const tasksReducer = (state: ShowsState, action: TasksActionTypes) => {
   switch (action.type) {
     case SHOWS_TYPES.LOAD_SHOWS:
-      return {
-        ...state,
-        allShows: [...state.allShows, ...action.payload],
-      };
+      const all = [...state.allShows, ...action.payload];
 
-    case SHOWS_TYPES.LOAD_MOST_RATED:
       return {
         ...state,
-        mostRated: [...state.mostRated, ...action.payload],
-      };
-
-    case SHOWS_TYPES.LOAD_RECENT:
-      return {
-        ...state,
-        recent: [...state.recent, ...action.payload],
+        allShows: all,
+        mostRated: [
+          ...all.sort((a, b) => b?.rating.average - a?.rating.average),
+        ],
+        recent: [
+          ...all.sort(
+            (a, b) => new Date(b.year).getTime() - new Date(a.year).getTime(),
+          ),
+        ],
       };
 
     case SHOWS_TYPES.LOAD_FAVOURITES:
       return {
         ...state,
         favourites: [...state.favourites, ...action.payload],
-      };
-
-    case SHOWS_TYPES.LOAD_BY_GENRE:
-      return {
-        ...state,
-        showsByGenre: action.payload,
       };
 
     case SHOWS_TYPES.LOAD_SEARCHED:

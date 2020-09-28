@@ -9,66 +9,62 @@ import { useAppState } from './components/AppProvider';
 import LoadShowsService from './services/LoadShowsService';
 import formatShowData from './utils/formatShowData';
 import { SHOWS_TYPES } from './store/shows/shows.actions';
-import { Show } from './types/shows';
 
 import './styles/app.scss';
+import { Show } from './types/shows';
 
 const App = () => {
   const history = useHistory();
   const [{ shows: showsState }, dispatch] = useAppState();
+  const [showsByGenre, setShowsByGenre] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(
     Boolean(showsState?.selectedGenre),
   );
   const loadShowsService = new LoadShowsService();
+  const { allShows, selectedGenre } = showsState;
+
+  const loadShows = async () => {
+    const shows = await loadShowsService
+      .execute()
+      .then(({ data }) => data.map((show: any) => formatShowData(show)));
+
+    dispatch({
+      type: SHOWS_TYPES.LOAD_SHOWS,
+      payload: shows,
+    });
+
+    return shows;
+  };
 
   useEffect(() => {
-    const { allShows, currentPage } = showsState;
-
     if (allShows && allShows.length === 0) {
-      loadShowsService.execute(currentPage).then(({ data }) => {
-        const shows = data.map((show: any) => formatShowData(show));
-
-        dispatch({
-          type: SHOWS_TYPES.LOAD_SHOWS,
-          payload: shows,
-        });
-
-        dispatch({
-          type: SHOWS_TYPES.LOAD_MOST_RATED,
-          payload: shows.sort(
-            (a: Show, b: Show) => b?.rating.average - a?.rating.average,
-          ),
-        });
-
-        dispatch({
-          type: SHOWS_TYPES.LOAD_RECENT,
-          payload: shows.sort(
-            (a: Show, b: Show) =>
-              new Date(b.year).getTime() - new Date(a.year).getTime(),
-          ),
-        });
-      });
+      loadShows();
     }
   }, []);
 
   useEffect(() => {
-    const { selectedGenre, allShows } = showsState;
     const isGenreSelected = Boolean(selectedGenre);
 
     setIsModalOpen(isGenreSelected);
 
     if (isGenreSelected) {
-      dispatch({
-        type: SHOWS_TYPES.LOAD_BY_GENRE,
-        payload: allShows.filter((show: Show) =>
-          show.genres.includes(selectedGenre),
-        ),
-      });
+      setShowsByGenre(
+        allShows.filter((show: Show) => show.genres.includes(selectedGenre)),
+      );
     }
   }, [showsState.selectedGenre]);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+
+    dispatch({
+      type: SHOWS_TYPES.SET_GENRE,
+      payload: '',
+    });
+  };
+
+  const handleCardClick = (id: number) => {
+    history.push(`/shows/${id}`);
 
     dispatch({
       type: SHOWS_TYPES.SET_GENRE,
@@ -85,17 +81,7 @@ const App = () => {
         title={showsState.selectedGenre}
         onClose={handleCloseModal}
       >
-        <CardList
-          items={showsState?.showsByGenre || []}
-          onCardClicked={id => {
-            history.push(`/shows/${id}`);
-
-            dispatch({
-              type: SHOWS_TYPES.SET_GENRE,
-              payload: '',
-            });
-          }}
-        />
+        <CardList items={showsByGenre} onCardClicked={handleCardClick} />
       </Modal>
     </>
   );

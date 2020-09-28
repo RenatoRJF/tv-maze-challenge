@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
+import Loader from '../Loader';
 
 import ShowCard from '../ShowCard';
 
@@ -24,6 +25,8 @@ interface CardListProps {
   orientation?: 'horizontal' | 'vertical';
   /* Finction fired when scroll ends */
   onScrollEnd?: () => void;
+  /* shows a loader when its value is true */
+  isLoading?: boolean;
 }
 
 const CardList: FC<CardListProps> = ({
@@ -32,11 +35,13 @@ const CardList: FC<CardListProps> = ({
   onCardClicked,
   orientation = 'horizontal',
   onScrollEnd,
+  isLoading,
 }) => {
   const listRef = useRef<any>();
 
   useEffect(() => {
     const elem = listRef.current;
+    elem.scrollLeft = 0;
 
     const onScroll = function () {
       if (elem.offsetWidth + elem.scrollLeft >= elem.scrollWidth) {
@@ -51,7 +56,7 @@ const CardList: FC<CardListProps> = ({
     return () => {
       elem.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [items]);
 
   return (
     <div className="card-list" data-testid="card-list">
@@ -70,6 +75,12 @@ const CardList: FC<CardListProps> = ({
             }}
           />
         ))}
+
+        {isLoading && (
+          <div className="loader-wrapper">
+            <Loader />
+          </div>
+        )}
       </ul>
     </div>
   );

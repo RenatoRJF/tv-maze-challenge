@@ -1,7 +1,7 @@
 import api from './api';
 
 class LoadShowsService {
-  public async execute(page: number): Promise<{ data: any }> {
+  public async execute(page: number = 1): Promise<{ data: any }> {
     return api.get(`shows?page=${page}`);
   }
 }
