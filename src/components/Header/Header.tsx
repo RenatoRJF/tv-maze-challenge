@@ -55,6 +55,10 @@ const Header: FC = () => {
     if (value) {
       debounceSearch(searchShowsService, value, 1000);
     }
+
+    if (showsState.selectedGenre) {
+      handleSelectGenre('');
+    }
   };
 
   const debounceSearch = (func: any, value: string, delay: number) => {
