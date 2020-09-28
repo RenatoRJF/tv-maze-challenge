@@ -46,6 +46,7 @@ const Search: FC<SearchProps> = ({ className, onSearch, onClose }) => {
       <img src={searchIcon} alt="search" onClick={handleActivateSearch} />
 
       <input
+        role="search-input"
         ref={inputRef}
         placeholder="Search here"
         value={value}
