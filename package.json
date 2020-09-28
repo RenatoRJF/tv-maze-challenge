@@ -42,9 +42,11 @@
     "eslint-plugin-react": "^7.20.0",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.5.0",
+    "husky": "^4.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.2",
     "jest-dom": "^4.0.0",
+    "lint-staged": "^10.4.0",
     "mini-css-extract-plugin": "^0.11.2",
     "postcss-loader": "^4.0.2",
     "precss": "^4.0.0",
@@ -70,5 +72,20 @@
   "bugs": {
     "url": "https://github.com/RenatoRJF/tv-maze-challenge/issues"
   },
-  "homepage": "https://github.com/RenatoRJF/tv-maze-challenge#readme"
+  "homepage": "https://github.com/RenatoRJF/tv-maze-challenge#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --max-warnings=0 --fix",
+      "jest --bail --fixRelatedTests"
+    ],
+    "**/*.{scss,css,html,yml,yaml,json,md}": [
+      "prettier --write"
+    ]
+  }
 }
