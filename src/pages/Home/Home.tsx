@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import CardList from '../../components/CardList';
@@ -6,7 +6,7 @@ import { useAppState } from '../../components/AppProvider';
 
 import './home.scss';
 
-const Home = () => {
+const Home: FC = () => {
   const history = useHistory();
   const [{ shows: showsState }] = useAppState();
   const { searched, loading } = showsState;
@@ -32,7 +32,7 @@ const Home = () => {
           />
 
           <CardList
-            title="Favourites"
+            title=""
             items={showsState?.favourites}
             onCardClicked={handleCardClick}
           />
