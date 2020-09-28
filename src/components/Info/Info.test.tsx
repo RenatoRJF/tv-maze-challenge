@@ -8,4 +8,12 @@ describe('Info', () => {
 
     expect(getByTestId('info')).toBeDefined();
   });
+
+  it('should props properly ', () => {
+    const { getByTestId } = render(<Info label="Genre" value="Action, Food" />);
+    const info = getByTestId('info');
+
+    expect(info).toHaveTextContent('Genre');
+    expect(info).toHaveTextContent('Action, Food');
+  });
 });
