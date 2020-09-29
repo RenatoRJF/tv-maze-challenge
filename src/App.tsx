@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import CardList from './components/CardList';
@@ -13,7 +13,7 @@ import { SHOWS_TYPES } from './store/shows/shows.actions';
 import './styles/app.scss';
 import { Show } from './types/shows';
 
-const App = () => {
+const App: FC = () => {
   const history = useHistory();
   const [{ shows: showsState }, dispatch] = useAppState();
   const [showsByGenre, setShowsByGenre] = useState([]);
@@ -21,12 +21,12 @@ const App = () => {
     Boolean(showsState?.selectedGenre),
   );
   const loadShowsService = new LoadShowsService();
-  const { allShows, selectedGenre } = showsState;
+  const { allShows, selectedGenre, searched, loading } = showsState;
 
   const loadShows = async () => {
     const shows = await loadShowsService
       .execute()
-      .then(({ data }) => data.map((show: any) => formatShowData(show)));
+      .then(({ data }) => data.map((show: Show) => formatShowData(show)));
 
     dispatch({
       type: SHOWS_TYPES.LOAD_SHOWS,
@@ -40,7 +40,7 @@ const App = () => {
     if (allShows && allShows.length === 0) {
       loadShows();
     }
-  }, []);
+  });
 
   useEffect(() => {
     const isGenreSelected = Boolean(selectedGenre);
@@ -52,7 +52,7 @@ const App = () => {
         allShows.filter((show: Show) => show.genres.includes(selectedGenre)),
       );
     }
-  }, [showsState.selectedGenre]);
+  }, [selectedGenre, allShows]);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -64,25 +64,38 @@ const App = () => {
   };
 
   const handleCardClick = (id: number) => {
-    history.push(`/shows/${id}`);
-
     dispatch({
       type: SHOWS_TYPES.SET_GENRE,
       payload: '',
     });
+
+    handleRedirect(id);
+  };
+
+  const handleRedirect = (id: number) => {
+    history.push(`/shows/${id}`);
   };
 
   return (
     <>
       <Header />
 
-      <Modal
-        open={isModalOpen}
-        title={showsState.selectedGenre}
-        onClose={handleCloseModal}
-      >
-        <CardList items={showsByGenre} onCardClicked={handleCardClick} />
-      </Modal>
+      {searched.length === 0 && !loading.search ? (
+        <Modal
+          open={isModalOpen}
+          title={showsState.selectedGenre}
+          onClose={handleCloseModal}
+        >
+          <CardList items={showsByGenre} onCardClicked={handleCardClick} />
+        </Modal>
+      ) : (
+        <CardList
+          isLoading={showsState.loading.search}
+          orientation="vertical"
+          items={showsState?.searched}
+          onCardClicked={handleRedirect}
+        />
+      )}
     </>
   );
 };

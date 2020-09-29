@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 
@@ -14,9 +14,10 @@ import './show.scss';
 import { Show } from '../../types/shows';
 import formatShowData from '../../utils/formatShowData';
 
-const Show = () => {
+const Show: FC = () => {
+  const [{ shows: showsState }] = useAppState();
+  const { searched, loading } = showsState;
   const params = useParams<{ id: string }>();
-  const loadShowByIdService = new LoadShowByIdService();
   const [show, setShow] = useState<Omit<Show, 'id'>>({
     name: '',
     year: '',
@@ -45,6 +46,8 @@ const Show = () => {
   });
 
   useEffect(() => {
+    const loadShowByIdService = new LoadShowByIdService();
+
     if (params?.id) {
       loadShowByIdService.execute(Number(params.id)).then(({ data }) => {
         setShow(formatShowData(data));
@@ -54,42 +57,46 @@ const Show = () => {
 
   return (
     <div className="show">
-      <div className="show__top-section">
-        <Link to="/">
-          <img src={ArrowLeft} alt="arrow left" />
-          Home
-        </Link>
+      {searched.length === 0 && !loading.search && (
+        <>
+          <div className="show__top-section">
+            <Link to="/">
+              <img src={ArrowLeft} alt="arrow left" />
+              Home
+            </Link>
 
-        <FavouriteButton text="Add to favourites" isFavourited={false} />
-      </div>
+            <FavouriteButton text="Add to favourites" isFavourited={false} />
+          </div>
 
-      <div className="show__details">
-        <ShowCard image={show.image} average={show?.rating.average} />
+          <div className="show__details">
+            <ShowCard image={show.image} average={show?.rating.average} />
 
-        <div>
-          <h1 className="show__title">{show.name}</h1>
+            <div>
+              <h1 className="show__title">{show.name}</h1>
 
-          <Info label="Status" value={show.status} />
+              <Info label="Status" value={show.status} />
 
-          {parse(show.summary)}
-        </div>
-      </div>
+              {parse(show.summary)}
+            </div>
+          </div>
 
-      <div className="show__info">
-        <div>
-          <Info label="Language" value={show.language} />
-          <Info label="Year" value={show.year} />
-          <Info label="Network" value={show.language} />
-          <Info label="Schedule" value={show.language} />
-        </div>
+          <div className="show__info">
+            <div>
+              <Info label="Language" value={show.language} />
+              <Info label="Year" value={show.year} />
+              <Info label="Network" value={show.language} />
+              <Info label="Schedule" value={show.language} />
+            </div>
 
-        <div>
-          <Info label="Genres" value={show.genres.join(', ')} />
-          <Info label="Status" value={show.status} />
-          <Info label="Show type" value={show.type} />
-          <Info label="Official site" value={show.officialSite} />
-        </div>
-      </div>
+            <div>
+              <Info label="Genres" value={show.genres.join(', ')} />
+              <Info label="Status" value={show.status} />
+              <Info label="Show type" value={show.type} />
+              <Info label="Official site" value={show.officialSite} />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -17,7 +17,7 @@ const Home: FC = () => {
 
   return (
     <div className="home">
-      {searched.length === 0 && !loading.search ? (
+      {searched.length === 0 && !loading.search && (
         <>
           <CardList
             title="Most rated"
@@ -37,13 +37,6 @@ const Home: FC = () => {
             onCardClicked={handleCardClick}
           />
         </>
-      ) : (
-        <CardList
-          isLoading={showsState.loading.search}
-          orientation="vertical"
-          items={showsState?.searched}
-          onCardClicked={handleCardClick}
-        />
       )}
     </div>
   );
